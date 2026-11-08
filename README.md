@@ -8,6 +8,15 @@ Es un proyecto de **Google Developer Groups Menorca** para explicar de forma pr�
 
 [Penalties.webm](https://github.com/user-attachments/assets/1eeb5add-ffb6-46dc-9041-58e7d7fc5b3b)
 
+## Haz el taller
+1. Crea un proyecto de Google Cloud (si no lo tienes ya) y activa la facturación.
+2. Si, como yo, no quieres pagar por experimentar un poco, Google ofrece $5 en créditos (ojo que acaban a las 24 horas). Puedes canjearlos desde este [CodeLab](https://codelabs.developers.google.com/codelabs/cloud-run/launch-your-web-based-video-game-with-ai?hl=es-419#0)
+3. Pega el prompt y los SVGs en el AI Studio. Mientras esperas, léete el funcionamiento en este readme para que tengas una foto completa de cómo funciona todo. También puedes pensar qué mejoras quieres añadirle al juego. AI Studio puede tardar al rededor de 15 minutos.
+4. Una vez haya terminado, prueba el juego. Probablemente no te funcionará porque, aunque AI Studio cree y configure las DB de Firebase, siempre lo hace con permisos muy restrictivos. Debes probar un poco y pedirle que lo solucione.
+5. Publica el juego.
+6. Si te da problemas con la facturación, debes pulsar "Setup billing".
+<img width="880" height="613" alt="image" src="https://github.com/user-attachments/assets/5e525a31-6a5c-44aa-bcbc-6615b52e05c2" />
+
 ## 🎮 Cómo jugar
 
 1. Un jugador inicia sesión con Google y pulsa **Crear partida**. Obtiene un código de 6 caracteres y un enlace para compartir.
@@ -289,15 +298,6 @@ El área del círculo es una fracción del área de la portería que depende de 
 Usa JavaScript vanilla con módulos ES (sin React, sin TypeScript, sin frameworks). Un solo index.html con el canvas y unos pocos elementos HTML para el lobby y la pantalla final. La suscripción onSnapshot se crea una única vez al entrar en la partida y se cancela solo al salir; nunca se recrea entre rondas.
 ```
 
-## 🚀 Recrear el juego
-
-1. Crea un proyecto de Google Cloud (si no lo tienes ya) y activa la facturación.
-2. Si, como yo, no quieres pagar por experimentar un poco, Google ofrece $5 en créditos (ojo que acaban a las 24 horas). Puedes canjearlos desde este CodeLab: https://codelabs.developers.google.com/codelabs/cloud-run/launch-your-web-based-video-game-with-ai?hl=es-419#0
-3. Pega el prompt y los SVGs en el AI Studio. Mientras esperas, léete el funcionamiento en este readme para que tengas una foto completa de cómo funciona. También puedes pensar qué mejoras quieres añadirle al juego.
-4. Una vez haya terminado, prueba el juego. Probablemente no te funcionará porque, aunque AI Studio cree y configure las DB de Firebase, siempre lo hace con permisos muy restrictivos. Debes probar un poco y pedirle que lo solucione.
-5. Publica el juego.
-6. Si te da problemas con la facturación, debes pulsar "Setup billing".
-
 
 ## 🎨 Gráficos
 
@@ -305,4 +305,4 @@ Los sprites (fondo, portero, delantero y pelota) son SVG originales creados para
 
 ---
 
-Hecho con 💙 por [GDG Menorca](https://gdg.community.dev/)
+Hecho con 💙 por [GDG Menorca](https://gdg.community.dev/gdg-menorca/) y [Guiem Bagur](https://guiem.dev/)
