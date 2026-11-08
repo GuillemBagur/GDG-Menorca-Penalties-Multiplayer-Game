@@ -1,0 +1,148 @@
+{
+  "entities": {
+    "User": {
+      "title": "User",
+      "description": "User profile for Google authenticated players",
+      "type": "object",
+      "properties": {
+        "displayName": {
+          "type": "string",
+          "description": "The user's display name",
+          "maxLength": 60
+        },
+        "photoURL": {
+          "type": "string",
+          "description": "User avatar URL",
+          "maxLength": 500
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Account registration timestamp"
+        }
+      },
+      "required": ["displayName", "createdAt"]
+    },
+    "Match": {
+      "title": "Match",
+      "description": "Match lobby session metadata and access control",
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "6-character unique join code",
+          "minLength": 6,
+          "maxLength": 6,
+          "pattern": "^[A-HJ-NP-Z2-9]{6}$"
+        },
+        "hostUid": {
+          "type": "string",
+          "description": "Firebase UID of the host (Google sign in)",
+          "maxLength": 128
+        },
+        "hostName": {
+          "type": "string",
+          "description": "Display name of the host",
+          "maxLength": 60
+        },
+        "guestUid": {
+          "type": "string",
+          "description": "Firebase UID of the guest player or null if waiting",
+          "maxLength": 128
+        },
+        "guestName": {
+          "type": "string",
+          "description": "Display name or nickname of the guest player",
+          "maxLength": 60
+        },
+        "guestIsAnonymous": {
+          "type": "boolean",
+          "description": "Whether guest entered anonymously"
+        },
+        "status": {
+          "type": "string",
+          "enum": ["waiting", "playing", "finished"],
+          "description": "Current lifecycle status of the match"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Creation timestamp"
+        },
+        "config": {
+          "type": "object",
+          "description": "Match configuration like max penalties and sudden death",
+          "properties": {
+            "totalPenalties": { "type": "number" },
+            "timeLimitSec": { "type": "number" }
+          }
+        }
+      },
+      "required": ["code", "hostUid", "hostName", "status", "createdAt"]
+    },
+    "MatchEvent": {
+      "title": "MatchEvent",
+      "description": "Immutable event log entry in the match event store",
+      "type": "object",
+      "properties": {
+        "seq": {
+          "type": "number",
+          "description": "Sequential integer index of the event"
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "MATCH_CREATED",
+            "PLAYER_JOINED",
+            "ROUND_STARTED",
+            "SHOT_COMMITTED",
+            "SHOT_X_LOCKED",
+            "SHOT_Y_LOCKED",
+            "SHOT_POWER_LOCKED",
+            "KEEPER_TARGET_SET",
+            "ROUND_RESOLVED",
+            "MATCH_ENDED"
+          ],
+          "description": "Event type identifier"
+        },
+        "playerId": {
+          "type": "string",
+          "description": "UID of the player committing the event",
+          "maxLength": 128
+        },
+        "round": {
+          "type": "number",
+          "description": "Current round number (1-indexed)"
+        },
+        "payload": {
+          "type": "object",
+          "description": "Event-specific payload"
+        },
+        "clientTs": {
+          "type": "number",
+          "description": "Client timestamp in milliseconds"
+        },
+        "serverTs": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Server timestamp of event creation"
+        }
+      },
+      "required": ["seq", "type", "playerId", "round", "payload", "clientTs"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": "User",
+      "description": "User profiles for Google authenticated players"
+    },
+    "/matches/{code}": {
+      "schema": "Match",
+      "description": "Match lobby session documents"
+    },
+    "/matches/{code}/events/{seq}": {
+      "schema": "MatchEvent",
+      "description": "Sequential event log for event sourcing"
+    }
+  }
+}

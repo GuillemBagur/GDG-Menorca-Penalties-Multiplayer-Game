@@ -1,0 +1,8 @@
+{
+  "name": "Duelo de Penaltis 1v1",
+  "description": "Videojuego multijugador 1 contra 1 de penaltis en 2D con Canvas, Firebase y Event Sourcing.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
